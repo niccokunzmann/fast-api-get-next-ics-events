@@ -1,5 +1,5 @@
 fastapi
 uvicorn[standard]
-recurring-ical-events
+recurring-ical-events>=2.2.0
 icalendar
 requests
