@@ -1,0 +1,5 @@
+fastapi
+uvicorn[standard]
+recurring-ical-events
+icalendar
+requests
