@@ -35,6 +35,11 @@
 This describes the test setup after you have set up the Local Setup.
 
 1. Install `tox`
+
+   ```sh
+   pip install tox
+   ```
+   
 2. Run `tox`
 
    ```sh
