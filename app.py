@@ -1,7 +1,7 @@
 #/usr/bin/python3
 from fastapi import FastAPI
 import recurring_ical_events
-from icalendar import Calendar
+from icalendar import Calendar, Event
 import requests
 import datetime
 
@@ -12,11 +12,11 @@ DEFAULT_REQUEST_HEADERS = {
 
 
 def get_text_from_url(url):
-    """Return the text from a url.""""
+    """Return the text from a url."""
     return requests.get(url, headers=DEFAULT_REQUEST_HEADERS).content
 
 
-def event_to_json(event : icalendar.VEVENT):
+def event_to_json(event : Event):
     """Turn an event into JSON."""
     return {
         "start": event["DTSTART"].to_ical().decode(),
@@ -34,8 +34,10 @@ async def root(event_count : int, ics_url : str):
     now = datetime.datetime.now()
     events = []
     result = {
-        "events" : events`
+        "events" : events
     }
     for event in recurring_ical_events.of(first_calendar).after(now):
         events.append(event_to_json(event))
+        if len(events) >= event_count:
+            break
     return result
